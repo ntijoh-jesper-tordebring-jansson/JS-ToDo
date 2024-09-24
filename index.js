@@ -21,33 +21,34 @@ function updateItemList() {
     itemList.innerHTML = "";
 
     for (let key in itemObject) {
-        const idNumber = `index${key}`;
-        let newItem = document.createElement("li");
-
-        newItem.innerHTML = `<span>${itemObject[key]}</span> <button id=${idNumber}>X</button>`;
-        itemList.appendChild(newItem);
-        document.querySelector(`#${idNumber}`).addEventListener('click', () => {
-            removeItem(key);
-        });
+        addItem(key)
     };
 };
 
-function searchItemList() {
+function searchItemList(input) {
     itemList.innerHTML = "";
 
     for (let key in itemObject) {
-        const idNumber = `index${key}`; 
-
+        if(input === "") {
+            updateItemList()
+        }
+        if(input !== itemObject[key]) {
+            continue;
+        }
         
-
-        let newItem = document.createElement("li");
-
-        newItem.innerHTML = `<span>${itemObject[key]}</span> <button id=${idNumber}>X</button>`;
-        itemList.appendChild(newItem);
-        document.querySelector(`#${idNumber}`).addEventListener('click', () => {
-            removeItem(key);
-        });
+        addItem(key)
     };    
+}
+
+function addItem(key) {
+    const idNumber = `index${key}`;
+    let newItem = document.createElement("li");
+
+    newItem.innerHTML = `<span>${itemObject[key]}</span> <button id=${idNumber}>X</button>`;
+    itemList.appendChild(newItem);
+    document.querySelector(`#${idNumber}`).addEventListener('click', () => {
+        removeItem(key);
+    });
 }
 
 submitItem.addEventListener('click', () => {
@@ -63,7 +64,7 @@ submitItem.addEventListener('click', () => {
 
 search.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        
+        searchItemList(search.value)        
 
         search.value = "";
     }
