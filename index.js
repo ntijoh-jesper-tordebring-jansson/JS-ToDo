@@ -7,7 +7,6 @@ let itemObject = {};
 let count = 0;
 
 function pushItem(value) {
-    // let size = Object.keys(itemObject).length;
     itemObject[count] = value;
     count++;
 };
