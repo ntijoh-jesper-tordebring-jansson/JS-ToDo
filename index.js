@@ -30,8 +30,9 @@ function searchItemList(input) {
     for (let key in itemObject) {
         if(input === "") {
             updateItemList()
+            break;
         }
-        if(input !== itemObject[key]) {
+        if(!itemObject[key].includes(input)) {
             continue;
         }
         
